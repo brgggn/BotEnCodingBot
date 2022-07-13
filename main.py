@@ -54,6 +54,7 @@ def a_menu(message):
     markup.row(types.KeyboardButton(keyboard('simplecommands')))
     markup.row(types.KeyboardButton(keyboard('coding')))
     markup.row(types.KeyboardButton(keyboard('conversion')))
+    markup.row(types.KeyboardButton(keyboard('about')))
 
     bot.send_message(message.chat.id, 'menu', reply_markup=markup)
 
@@ -580,6 +581,9 @@ def c_dnup(message): a_dnup(message)
 
 @bot.message_handler(commands=['Ms', 'ms'])
 def c_dnup(message): a_ms(message)
+
+@bot.message_handler(commands=['101'])
+def c_dnup(message): bot.send_audio(message.chat.id, open('xyz/caucasian_disco.mp3', 'rb'), '', '', 'discoprovocation')
 ########################################################################################################################
 def a_bot(message):
     try:
@@ -653,9 +657,6 @@ def c_wacker(message):
 
 def a_location(message): bot.send_location(message.chat.id, (message.text).split()[0], (message.text).split()[1])
 
-@bot.message_handler(commands=['disco', '01010', '10101'])
-def c_disco(message): bot.send_audio(message.chat.id, open('xyz/caucasian_disco.mp3', 'rb'), '', '', 'discoprovocation')
-
 @bot.message_handler(commands=['EA', 'ea', 'Ea', 'eA', '234', '11101010'])
 def c_ea(message): bot.send_message(message.from_user.id, f'{message.text} - ' + mes_txt('234'))
 
@@ -680,6 +681,9 @@ def textmessages(message):
         pass
     elif message.text.lower() == keyboard('menu'): a_menu(message)
 
+    elif message.text.lower() == keyboard('about'):
+        bot.send_message(message.chat.id, text= mes_txt('about'))
+        bot.send_message(message.chat.id, text=mes_txt('links'))
 
     else:
         bot.send_message(message.chat.id, message.text + mes_txt('mirror'))
