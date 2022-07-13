@@ -4,7 +4,7 @@ import zipfile
 import urllib.parse
 import random
 from qrcode import QRCode
-from PIL import Image
+#from PIL import Image
 
 #######################################################################################################################
 def f_inimage(user_id, text):

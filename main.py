@@ -3,23 +3,16 @@ import time
 
 import telebot
 from telebot import types
+from key import *
 ########################################################################################################################
 from f_def import *
 from book import *
 ########################################################################################################################
 # сохраняет все пользовательские файлы
-def api():
-    txt = open('api.txt').read().split('\n')
-    global bot, adm, adm2
-    bot, adm, adm2 = telebot.TeleBot(txt[0]), txt[1], txt[2]
-    return bot, adm, adm2
 
-
-api()
 
 ########################################################################################################################
-try: bot.send_message(adm2, 'bot working\n@BotEnCodingBot')
-except: pass
+
 ########################################################################################################################
 # start
 def a_start(message):
@@ -36,18 +29,17 @@ def a_start(message):
         my_file = open(file, 'w')
         b_start(message, my_file)
 
-    if str(message.chat.id) == adm:
+    if str(message.chat.id) in adm:
         time.sleep(0.5)
         bot.send_message(message.chat.id, start()[1])
         time.sleep(0.5)
         bot.send_message(message.chat.id, start()[3])
         time.sleep(0.5)
-        bot.send_message(message.chat.id, start()[2])
     else:
         time.sleep(0.5)
         bot.send_message(message.chat.id, start()[1])
         time.sleep(0.5)
-        bot.send_message(message.chat.id, start()[2])
+    a_menu(message)
 
 def b_start(message, my_file):
     try:
@@ -60,7 +52,8 @@ def b_start(message, my_file):
 def a_menu(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     markup.row(types.KeyboardButton(keyboard('simplecommands')))
-    markup.row(types.KeyboardButton(keyboard('coding')), types.KeyboardButton(keyboard('conversion')))
+    markup.row(types.KeyboardButton(keyboard('coding')))
+    markup.row(types.KeyboardButton(keyboard('conversion')))
 
     bot.send_message(message.chat.id, 'menu', reply_markup=markup)
 
@@ -668,6 +661,9 @@ def c_ea(message): bot.send_message(message.from_user.id, f'{message.text} - ' +
 
 @bot.message_handler(commands=['101'])
 def c_ea(message): bot.send_message(message.from_user.id, mes_txt('101') + f'\n/{message.text}')
+
+@bot.message_handler(commands=['error'])
+def error(message): print(e)
 ########################################################################################################################
 @bot.message_handler(content_types=['text'])
 def textmessages(message):
@@ -684,7 +680,9 @@ def textmessages(message):
         pass
     elif message.text.lower() == keyboard('menu'): a_menu(message)
 
-    else: bot.send_message(message.from_user.id, mes_txt('bag'))
+
+    else:
+        bot.send_message(message.chat.id, message.text + mes_txt('mirror'))
 ##########################################################################################################################
 def inline_comand(comand):
     try:
@@ -752,7 +750,7 @@ def inline_comand(comand):
             markup.add(item_caesar, item_vigenere)
             markup.add(item_morse, item_transnumb)
             markup.add(item_bin, item_url)
-            markup.add(item_randp, item_dnup)
+            markup.add(item_randp)
             markup.add(item_menu, item_settings)
             return markup
 
@@ -784,7 +782,7 @@ def inline_comand(comand):
         elif comand == 'simplecommands':
             markup.add(item_qr)
             markup.add(item_randp)
-            markup.add(item_dnup)
+
             return markup
 ########################################################################################################################
         elif comand == 'image':

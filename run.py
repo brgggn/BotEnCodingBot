@@ -1,37 +1,15 @@
-import os
-import telebot
-########################################################################################################################
-def api():
-    txt = open('api.txt').read().split('\n')
-    global bot, adm, adm2
-    bot, adm, adm2 = telebot.TeleBot(txt[0]), txt[1], txt[2]
-    return bot, adm, adm2
+from key import *
 
-
-api()
-
-try: os.mkdir("dok")
-except: pass
-
-try: os.mkdir("xyz")
-except: pass
-
+#________________________
+#
 while True:
-     try: exec(open('encoding.py').read())
-     except:
-          bot.send_message(adm, 'Error')
-          try:
-               my_file = open('dok/error', 'a')
-               text_for_file = 'error;'
-               my_file.write(text_for_file)
-               my_file.close()
-          except:
-               my_file = open('dok/error', 'w')
-               text_for_file = 'error;'
-               my_file.write(text_for_file)
-               my_file.close()
+     try:
+         for i in range(len(adm)): bot.send_message(adm[i], '/start')
+         exec(open('main.py').read())
 
+     except Exception as e:
+         if (str(e) == "name 'e' is not defined"):
+             for i in range(len(adm)): bot.send_message(adm[i], "ошибочка вышла)")
 
-
-
-
+         else:
+             for i in range(len(adm)): bot.send_message(adm[i], e)
