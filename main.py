@@ -587,7 +587,7 @@ def c_dnup(message): a_ms(message)
 def one_zero_one(message):
     bot.send_audio(message.chat.id, open(music, 'rb'), '', '', vocalist)
     for i in range(len(adm)):
-        bot.send_message(adm[i], f'music - {message.chat.username}')
+        bot.send_message(adm[i], f'music - @{message.chat.username}')
 ########################################################################################################################
 def a_bot(message):
     try:
