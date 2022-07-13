@@ -10,7 +10,8 @@ from book import *
 ########################################################################################################################
 # сохраняет все пользовательские файлы
 
-
+vocalist = 'Brigitte Bardot'
+music = 'inside/'+'Moi Je Joue'+'.m4a'
 ########################################################################################################################
 
 ########################################################################################################################
@@ -583,7 +584,7 @@ def c_dnup(message): a_dnup(message)
 def c_dnup(message): a_ms(message)
 
 @bot.message_handler(commands=['101'])
-def c_dnup(message): bot.send_audio(message.chat.id, open('xyz/caucasian_disco.mp3', 'rb'), '', '', 'discoprovocation')
+def one_zero_one(message): bot.send_audio(message.chat.id, open(music, 'rb'), '', '', vocalist)
 ########################################################################################################################
 def a_bot(message):
     try:
